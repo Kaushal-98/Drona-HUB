@@ -286,7 +286,7 @@ Answer questions about:
     addMessage(text, 'user');
     input.value = '';
     showTyping();
-    if (typeof API_KEY !== 'undefined' && API_KEY !== 'AIzaSyCgJ-CAebfHNAr5Np-pPD2j81ypiVnViG0') {
+    if (typeof API_KEY !== 'undefined' && API_KEY !== 'YOUR_API_KEY') {
       const reply = await askAI(text);
       hideTyping();
       addMessage(reply, 'bot');
