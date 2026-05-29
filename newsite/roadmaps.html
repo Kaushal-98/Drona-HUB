@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Roadmaps – Dronacharya College</title>
+  <link rel="icon" type="image/png" href="finalicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional styles for roadmaps page */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .filter-chip {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,255,255,0.3);
+      border-radius: 40px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #b0fff0;
+    }
+    .filter-chip:hover, .filter-chip.active {
+      background: #0ff;
+      color: #000;
+      border-color: #0ff;
+      box-shadow: 0 0 15px cyan;
+    }
+    .search-box {
+      max-width: 400px;
+      margin: 0 auto 30px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 60px;
+      border: 1px solid rgba(0,255,255,0.3);
+      background: rgba(30,50,50,0.6);
+      color: white;
+      font-size: 1rem;
+      backdrop-filter: blur(5px);
+      transition: 0.2s;
+    }
+    .search-box input:focus {
+      border-color: #0ff;
+      outline: none;
+      box-shadow: 0 0 15px cyan;
+    }
+    .roadmap-card {
+      transition: 0.3s ease;
+    }
+    .progress-bar-custom {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #0ff, #f0f);
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+    /* Modal styles */
+    .modal-content-detailed {
+      max-width: 800px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .roadmap-image {
+      width: 100%;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+    .accordion-btn {
+      background: rgba(0,255,255,0.1);
+      border: 1px solid #0ff;
+      color: #0ff;
+      padding: 10px 20px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin: 10px 0;
+      transition: 0.2s;
+      width: 100%;
+      text-align: center;
+    }
+    .accordion-btn:hover {
+      background: #0ff;
+      color: #000;
+    }
+    .details-content {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 20px;
+    }
+    .details-content.show {
+      display: block;
+    }
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .skill-tag {
+      background: rgba(0,255,255,0.1);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      color: #0ff;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .roadmap-card {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <nav style="position: static; margin-bottom: 20px;">
+    <a href="index.html" class="logo">
+      <img src="Screenshot 2026-03-01 110524.png" alt="Dronacharya College" style="height: 50px; width: auto;">
+    </a>
+    <div class="nav-links">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#resources">Resources</a>
+      <a href="index.html#events">Events</a>
+      <a href="index.html#holiday">Holidays</a>
+      <a href="index.html#guide">Guide</a>
+      <a href="index.html#games">Games</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="wrapper">
+    <div class="page-header">
+      <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+      <h1 class="section-title">Career Roadmaps</h1>
+      <p class="text-center" style="color: #b0fff0; margin-bottom: 30px;">Choose your path – from beginner to pro</p>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="🔍 Search roadmap (e.g., AI, Web, Cloud)...">
+    </div>
+    <div class="filters" id="filterContainer">
+      <span class="filter-chip active" data-cat="all">All</span>
+      <span class="filter-chip" data-cat="dev">💻 Development</span>
+      <span class="filter-chip" data-cat="data">📊 Data & AI</span>
+      <span class="filter-chip" data-cat="infra">☁️ Infra & Cloud</span>
+      <span class="filter-chip" data-cat="security">🔐 Security</span>
+      <span class="filter-chip" data-cat="design">🎨 Design</span>
+      <span class="filter-chip" data-cat="hardware">🤖 Hardware/IoT</span>
+    </div>
+
+    <!-- Roadmaps Grid -->
+    <div class="card-grid" id="roadmapsGrid"></div>
+  </div>
+
+  <footer style="margin-top: 50px;">
+    <p class="animate-text">🚀 Dronacharya Juniors – build your future 🚀</p>
+  </footer>
+
+  <!-- Modal for detailed roadmap -->
+  <div class="modal" id="roadmapModal">
+    <div class="modal-content modal-content-detailed">
+      <span class="close" id="closeRoadmapModal">&times;</span>
+      <h2 id="modalTitle" style="color: #0ff; margin-bottom: 20px;"></h2>
+      <img id="modalImage" class="roadmap-image" alt="Roadmap Image">
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // Roadmap data with image links
+    const roadmaps = [
+      {
+        title: "Software Development / SDE",
+        category: "dev",
+        icon: "fa-code",
+        description: "Build apps, websites, software systems, APIs, platforms.",
+        skills: ["C/C++", "Java", "Python", "JavaScript", "DSA", "OOP", "DBMS", "OS", "Computer Networks", "Git"],
+        technologies: ["React", "Node.js", "Spring Boot", "Django", "MySQL", "MongoDB"],
+        roles: ["Software Engineer", "Backend Developer", "Full Stack Developer", "App Developer"],
+        bestFor: "Students who enjoy coding and problem-solving.",
+        image: "sde roadmap.png"
+      },
+      {
+        title: "Web Development",
+        category: "dev",
+        icon: "fa-globe",
+        description: "Create websites and web applications (frontend, backend, full stack).",
+        skills: ["HTML", "CSS", "JavaScript", "React/Next.js", "Node.js", "APIs", "MongoDB/MySQL"],
+        projects: ["Portfolio Website", "E-commerce Site", "Car Rental System", "Blog Platform"],
+        roles: ["Frontend Developer", "Backend Developer", "Full Stack Developer"],
+        bestFor: "Creative coders who love building interactive interfaces.",
+        image: "https://i.pinimg.com/736x/6b/47/8b/6b478bbec1f5f433dac8db8e771b4e9e.jpg"
+      },
+      {
+        title: "AI / Machine Learning",
+        category: "data",
+        icon: "fa-brain",
+        description: "Build intelligent systems that learn from data.",
+        skills: ["Python", "Mathematics", "Linear Algebra", "Probability", "Statistics", "ML Algorithms"],
+        libraries: ["NumPy", "Pandas", "Scikit-learn", "TensorFlow", "PyTorch"],
+        topics: ["Regression", "Classification", "Neural Networks", "Deep Learning", "NLP", "Computer Vision"],
+        projects: ["Chatbot", "Face Detection", "AI Resume Screener", "Recommendation System"],
+        roles: ["ML Engineer", "AI Engineer", "Data Scientist"],
+        bestFor: "Students interested in maths + AI concepts.",
+        image: "https://i.pinimg.com/736x/5b/eb/c1/5bebc1a16f963e91f5911de06f696e49.jpg"
+      },
+      {
+        title: "Data Science",
+        category: "data",
+        icon: "fa-chart-line",
+        description: "Analyze and visualize data to get insights.",
+        skills: ["Python/R", "SQL", "Statistics", "Data Visualization", "Machine Learning Basics"],
+        tools: ["Power BI", "Tableau", "Pandas", "Excel"],
+        roles: ["Data Analyst", "Data Scientist", "Business Analyst"],
+        bestFor: "Students who like analytics and working with data.",
+        image: "https://i.pinimg.com/736x/1c/c7/6a/1cc76a79d8411a99da257957cc59214a.jpg"
+      },
+      {
+        title: "Cloud Computing",
+        category: "infra",
+        icon: "fa-cloud",
+        description: "Manage servers, deployment, cloud infrastructure.",
+        platforms: ["AWS", "Microsoft Azure", "Google Cloud"],
+        skills: ["Linux", "Networking", "Virtual Machines", "Docker", "Kubernetes", "CI/CD"],
+        roles: ["Cloud Engineer", "DevOps Engineer", "Site Reliability Engineer"],
+        certifications: ["AWS Certified Cloud Practitioner", "Azure Fundamentals"],
+        bestFor: "Students interested in deployment and infrastructure.",
+        image: "https://i.pinimg.com/1200x/72/dd/9f/72dd9f1d0932842183c98d1159e05ec7.jpg"
+      },
+      {
+        title: "Cybersecurity",
+        category: "security",
+        icon: "fa-shield-alt",
+        description: "Protect systems from hackers and attacks.",
+        skills: ["Networking", "Linux", "Cryptography", "Ethical Hacking", "Web Security"],
+        tools: ["Kali Linux", "Wireshark", "Burp Suite", "Metasploit"],
+        roles: ["Security Analyst", "Ethical Hacker", "Penetration Tester"],
+        bestFor: "Students interested in security and hacking concepts.",
+        image: "https://i.pinimg.com/736x/55/c9/5e/55c95e3e8870d72bd3009cc41cf8711a.jpg"
+      },
+      {
+        title: "Mobile App Development",
+        category: "dev",
+        icon: "fa-mobile-alt",
+        description: "Build Android/iOS applications.",
+        technologies: ["Android (Kotlin/Java)", "Flutter", "React Native"],
+        projects: ["Chat App", "Food Delivery App", "Notes App"],
+        roles: ["Android Developer", "Flutter Developer", "iOS Developer"],
+        bestFor: "Those who want to create apps for phones.",
+        image: "https://i.pinimg.com/736x/a8/fd/46/a8fd46fa11dcd9700fdb643fe7cd2e76.jpg"
+      },
+      {
+        title: "Game Development",
+        category: "dev",
+        icon: "fa-gamepad",
+        description: "Develop PC/mobile/3D games.",
+        skills: ["C#", "Unity", "Unreal Engine", "Game Physics"],
+        roles: ["Game Developer", "Gameplay Programmer"],
+        bestFor: "Creative minds who love gaming and programming.",
+        image: "https://i.pinimg.com/736x/dc/03/73/dc0373d1445fe5f3e67225b927f8648b.jpg"
+      },
+      {
+        title: "Embedded Systems / IoT",
+        category: "hardware",
+        icon: "fa-microchip",
+        description: "Work with hardware + software integration.",
+        skills: ["C/C++", "Microcontrollers", "Sensors", "Arduino/Raspberry Pi"],
+        roles: ["Embedded Engineer", "IoT Developer"],
+        bestFor: "Hardware enthusiasts.",
+        image: "https://i.pinimg.com/1200x/be/df/ee/bedfee3f89b4145ae40d2e1d8d66bcc5.jpg"
+      },
+      {
+        title: "Blockchain Development",
+        category: "dev",
+        icon: "fa-link",
+        description: "Build decentralized apps and smart contracts.",
+        skills: ["Solidity", "Ethereum", "Smart Contracts", "Web3"],
+        roles: ["Blockchain Developer", "Smart Contract Engineer"],
+        bestFor: "Future of finance and decentralized systems.",
+        image: "https://i.pinimg.com/736x/eb/6e/6b/eb6e6b9757d58acfddfd1f295f16f496.jpg"
+      },
+      {
+        title: "DevOps",
+        category: "infra",
+        icon: "fa-infinity",
+        description: "Automate deployment and software delivery.",
+        skills: ["Linux", "Docker", "Kubernetes", "Jenkins", "CI/CD Pipelines"],
+        roles: ["DevOps Engineer", "Automation Engineer"],
+        bestFor: "Students who love automation and infrastructure.",
+        image: "https://i.pinimg.com/736x/c3/2c/53/c32c532135b21659f7ac060825b55155.jpg"
+      },
+      {
+        title: "UI/UX Design",
+        category: "design",
+        icon: "fa-paintbrush",
+        description: "Design app and website interfaces.",
+        tools: ["Figma", "Adobe XD"],
+        skills: ["User Research", "Wireframing", "Design Systems"],
+        roles: ["UI Designer", "UX Designer"],
+        bestFor: "Creative students with an eye for design.",
+        image: "https://i.pinimg.com/1200x/e1/40/a7/e140a74d8686fcbc34f4f9bc0584c949.jpg"
+      },
+      {
+        title: "AR/VR Development",
+        category: "dev",
+        icon: "fa-vr-cardboard",
+        description: "Build Augmented Reality and Virtual Reality apps.",
+        skills: ["Unity", "C#", "3D Modeling"],
+        bestFor: "Immersive tech enthusiasts.",
+        image: "https://i.pinimg.com/1200x/00/0e/e6/000ee69728506932960d25b77f2e738a.jpg"
+      },
+      {
+        title: "Robotics",
+        category: "hardware",
+        icon: "fa-robot",
+        description: "Design and program robots.",
+        skills: ["Embedded Systems", "AI", "Sensors", "Control Systems"],
+        roles: ["Robotics Engineer"],
+        bestFor: "Hardware + AI lovers.",
+        image: "https://i.pinimg.com/736x/9f/42/52/9f42529de28867e96a5194f2c9cfc812.jpg"
+      }
+    ];
+
+    const grid = document.getElementById('roadmapsGrid');
+    const searchInput = document.getElementById('searchInput');
+    let activeCategory = 'all';
+
+    // Render roadmaps as cards
+    function renderRoadmaps() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filtered = roadmaps.filter(rm => {
+        const matchesCat = activeCategory === 'all' || rm.category === activeCategory;
+        const matchesSearch = rm.title.toLowerCase().includes(searchTerm) || 
+                              rm.description.toLowerCase().includes(searchTerm) ||
+                              (rm.skills && rm.skills.some(s => s.toLowerCase().includes(searchTerm))) ||
+                              (rm.roles && rm.roles.some(r => r.toLowerCase().includes(searchTerm)));
+        return matchesCat && matchesSearch;
+      });
+      grid.innerHTML = '';
+      filtered.forEach((rm, idx) => {
+        const card = document.createElement('div');
+        card.className = 'card roadmap-card';
+        card.style.animationDelay = `${idx * 0.05}s`;
+        // random progress for demo (0-80%)
+        const progress = Math.floor(Math.random() * 80);
+        card.innerHTML = `
+          <i class="fas ${rm.icon}" style="font-size: 3rem; margin-bottom: 15px;"></i>
+          <h3>${rm.title}</h3>
+          <p>${rm.description.substring(0, 80)}...</p>
+          <div class="progress-bar-custom">
+            <div class="progress-fill" style="width: ${progress}%;"></div>
+          </div>
+          <div class="skill-list">
+            ${(rm.skills ? rm.skills.slice(0, 4) : rm.tools ? rm.tools.slice(0,4) : []).map(s => `<span class="skill-tag">${s}</span>`).join('')}
+            ${(rm.skills && rm.skills.length > 4) || (rm.tools && rm.tools.length > 4) ? '<span class="skill-tag">+ more</span>' : ''}
+          </div>
+          <button class="btn view-details" data-title="${rm.title}" style="margin-top: 15px;">View Roadmap</button>
+        `;
+        grid.appendChild(card);
+      });
+      // attach event listeners to the new buttons
+      document.querySelectorAll('.view-details').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const title = btn.getAttribute('data-title');
+          const roadmap = roadmaps.find(r => r.title === title);
+          if (roadmap) showModal(roadmap);
+        });
+      });
+    }
+
+    // Show modal with image and expandable details
+    function showModal(rm) {
+      const modal = document.getElementById('roadmapModal');
+      const titleEl = document.getElementById('modalTitle');
+      const imageEl = document.getElementById('modalImage');
+      const bodyEl = document.getElementById('modalBody');
+      titleEl.innerText = rm.title;
+      imageEl.src = rm.image;
+      imageEl.alt = `${rm.title} Roadmap`;
+      
+      // Build details content with an accordion
+      let detailsHTML = `<button class="accordion-btn" id="toggleDetailsBtn">📘 Show Details</button>
+                         <div id="detailsContent" class="details-content">`;
+      if (rm.description) detailsHTML += `<p><strong>Description:</strong> ${rm.description}</p>`;
+      if (rm.skills) detailsHTML += `<p><strong>Skills Required:</strong> ${rm.skills.join(', ')}</p>`;
+      if (rm.technologies) detailsHTML += `<p><strong>Technologies:</strong> ${rm.technologies.join(', ')}</p>`;
+      if (rm.libraries) detailsHTML += `<p><strong>Libraries:</strong> ${rm.libraries.join(', ')}</p>`;
+      if (rm.topics) detailsHTML += `<p><strong>Topics:</strong> ${rm.topics.join(', ')}</p>`;
+      if (rm.projects) detailsHTML += `<p><strong>Projects:</strong> ${rm.projects.join(', ')}</p>`;
+      if (rm.roles) detailsHTML += `<p><strong>Roles:</strong> ${rm.roles.join(', ')}</p>`;
+      if (rm.bestFor) detailsHTML += `<p><strong>Best For:</strong> ${rm.bestFor}</p>`;
+      if (rm.tools) detailsHTML += `<p><strong>Tools:</strong> ${rm.tools.join(', ')}</p>`;
+      if (rm.certifications) detailsHTML += `<p><strong>Certifications:</strong> ${rm.certifications.join(', ')}</p>`;
+      detailsHTML += `</div>`;
+      bodyEl.innerHTML = detailsHTML;
+      
+      modal.classList.add('active');
+      
+      // Toggle details visibility
+      const toggleBtn = document.getElementById('toggleDetailsBtn');
+      const detailsDiv = document.getElementById('detailsContent');
+      if (toggleBtn && detailsDiv) {
+        toggleBtn.onclick = () => {
+          detailsDiv.classList.toggle('show');
+          toggleBtn.textContent = detailsDiv.classList.contains('show') ? "📘 Hide Details" : "📘 Show Details";
+        };
+      }
+    }
+
+    // Filter chips
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeCategory = chip.getAttribute('data-cat');
+        renderRoadmaps();
+      });
+    });
+
+    searchInput.addEventListener('input', renderRoadmaps);
+
+    // Modal close
+    const modal = document.getElementById('roadmapModal');
+    const closeModal = document.getElementById('closeRoadmapModal');
+    closeModal.onclick = () => modal.classList.remove('active');
+    window.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+
+    renderRoadmaps();
+  </script>
+</body>
+</html>

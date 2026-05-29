@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coding Resources – Dronacharya College</title>
+  <link rel="icon" type="image/png" href="finalicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional styles for coding resources page */
+    .creator-card {
+      background: rgba(30, 50, 50, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,255,200,0.2);
+      border-radius: 35px;
+      padding: 25px;
+      text-align: center;
+      transition: 0.3s ease;
+      cursor: pointer;
+    }
+    .creator-card:hover {
+      transform: translateY(-10px);
+      border-color: #0ff;
+      box-shadow: 0 20px 30px #0ff3;
+    }
+    .creator-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #0ff;
+      box-shadow: 0 0 15px cyan;
+    }
+    .creator-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #b0fff0;
+      margin-bottom: 10px;
+    }
+    .creator-desc {
+      color: #a0b0b0;
+      font-size: 0.9rem;
+      margin: 10px 0;
+    }
+    .link-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+    .link-btn {
+      background: transparent;
+      border: 2px solid #0ff;
+      color: #0ff;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .link-btn:hover {
+      background: #0ff;
+      color: #000;
+      box-shadow: 0 0 15px cyan;
+    }
+    .back-home {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #0ff;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+    .back-home:hover {
+      text-decoration: underline;
+    }
+    .page-header {
+      text-align: center;
+      margin: 40px 0 20px;
+    }
+  </style>
+</head>
+<body>
+  <nav style="position: static; margin-bottom: 20px;">
+    <a href="index.html" class="logo">
+      <img src="Screenshot 2026-03-01 110524.png" alt="Dronacharya College" style="height: 50px; width: auto;">
+    </a>
+    <div class="nav-links">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#resources">Resources</a>
+      <a href="index.html#events">Events</a>
+      <a href="index.html#holiday">Holidays</a>
+      <a href="index.html#guide">Guide</a>
+      <a href="index.html#games">Games</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="wrapper">
+    <div class="page-header">
+      <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+      <h1 class="section-title">Coding Resources</h1>
+      <p class="text-center" style="color: #b0fff0; margin-bottom: 30px;">Meet the creators – your guides to mastering coding</p>
+    </div>
+
+    <div class="card-grid" id="creatorsGrid"></div>
+  </div>
+
+  <footer style="margin-top: 50px;">
+    <p class="animate-text">🚀 Dronacharya Juniors – build your future 🚀</p>
+  </footer>
+
+  <script>
+    // List of coding creators/resources
+    const creators = [
+      {
+        name: "freeCodeCamp",
+        image: "https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png",
+        description: "Free, open-source platform with thousands of hours of coding tutorials, projects, and certifications.",
+        youtube: "https://www.youtube.com/c/Freecodecamp",
+        website: "https://www.freecodecamp.org/"
+      },
+      {
+        name: "CodeWithHarry",
+        image: "9aYo2a1Is4mh5SdZomJZU16s31IW02g5.png",
+        description: "Hindi/English tech tutorials covering web dev, Python, Java, and more. Perfect for Indian students.",
+        youtube: "https://www.youtube.com/c/CodeWithHarry",
+        website: "https://www.codewithharry.com/"
+      },
+      {
+        name: "Apna College",
+        image: "apnacollege.in.jpg",
+        description: "Community-driven learning platform with free placement preparation, DSA, and full-stack courses.",
+        youtube: "https://www.youtube.com/c/ApnaCollegeOfficial",
+        website: "https://www.apnacollege.in/"
+      },
+      {
+        name: "Love Babbar",
+        image: "OIP.webp",
+        description: "Placement focused DSA course, web development, and motivation for aspiring software engineers.",
+        youtube: "https://www.youtube.com/@CodeHelp",
+        website: "https://www.codehelp.in/"
+      },
+      {
+        name: "Striver (takeUforward)",
+        image: "OIP (1).webp",
+        description: "Best DSA sheet and placement preparation. Striver's SDE sheet is a goldmine.",
+        youtube: "https://www.youtube.com/@takeUforward",
+        website: "https://takeuforward.org/"
+      },
+      {
+        name: "GeeksforGeeks",
+        image: "gfg-image.jpg",
+        description: "World's largest technical resource hub with articles, practice problems, and interview prep.",
+        youtube: "https://www.youtube.com/c/GeeksforGeeksVideos",
+        website: "https://www.geeksforgeeks.org/"
+      },
+      {
+        name: "LeetCode",
+        image: "https://leetcode.com/static/images/LeetCode_Sharing.png",
+        description: "Platform for practicing coding problems, mock interviews, and preparing for tech giants.",
+        youtube: "https://leetcode.com/",
+        website: "https://leetcode.com/"
+      },
+      {
+        name: "Codeforces",
+        image: "OIP (2).webp",
+        description: "Competitive programming platform with regular contests and a huge problem archive.",
+        youtube: "https://codeforces.com/",
+        website: "https://codeforces.com/"
+      }
+    ];
+
+    const grid = document.getElementById('creatorsGrid');
+    creators.forEach(creator => {
+      const card = document.createElement('div');
+      card.className = 'creator-card';
+      card.innerHTML = `
+        <img src="${creator.image}" alt="${creator.name}" class="creator-img" onerror="this.src='https://via.placeholder.com/120?text=No+Image'">
+        <div class="creator-name">${creator.name}</div>
+        <div class="creator-desc">${creator.description}</div>
+        <div class="link-buttons">
+          <a href="${creator.youtube}" target="_blank" class="link-btn"><i class="fab fa-youtube"></i> YouTube</a>
+          <a href="${creator.website}" target="_blank" class="link-btn"><i class="fas fa-globe"></i> Website</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

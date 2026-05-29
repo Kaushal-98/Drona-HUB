@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Previous Year Papers – Dronacharya College</title>
+  <link rel="icon" type="image/png" href="finalicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-header {
+      text-align: center;
+      margin: 40px 0 20px;
+      position: relative;
+    }
+    .back-home, .back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #0ff;
+      text-decoration: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .back-home:hover, .back-btn:hover {
+      text-decoration: underline;
+    }
+    .hidden {
+      display: none !important;
+    }
+    .syllabus-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 15px;
+    }
+    .syllabus-item {
+      background: rgba(30, 50, 50, 0.6);
+      border-radius: 25px;
+      padding: 15px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      border: 1px solid #0ff3;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .syllabus-item:hover {
+      transform: translateY(-5px);
+      border-color: #0ff;
+    }
+    .syllabus-item h4 {
+      color: #b0fff0;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+    .subject-btn {
+      background: transparent;
+      border: 2px solid #0ff;
+      color: #0ff;
+      padding: 8px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      margin: 5px;
+    }
+    .subject-btn:hover {
+      background: #0ff;
+      color: #000;
+    }
+    .subject-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+    }
+    .subject-item {
+      background: rgba(30, 50, 50, 0.4);
+      border-radius: 20px;
+      padding: 12px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+      border: 1px solid #0ff3;
+    }
+    .subject-item h4 {
+      color: #b0fff0;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <nav style="position: static; margin-bottom: 20px;">
+    <a href="index.html" class="logo">
+      <img src="Screenshot 2026-03-01 110524.png" alt="Dronacharya College" style="height: 50px; width: auto;">
+    </a>
+    <div class="nav-links">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#resources">Resources</a>
+      <a href="index.html#events">Events</a>
+      <a href="index.html#holiday">Holidays</a>
+      <a href="index.html#guide">Guide</a>
+      <a href="index.html#games">Games</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="wrapper">
+    <div class="page-header">
+      <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+      <h1 class="section-title" id="mainTitle">Previous Year Papers – Select Branch</h1>
+      <div id="backContainer" class="hidden">
+        <span class="back-btn" id="backBtn"><i class="fas fa-arrow-left"></i> Back</span>
+      </div>
+    </div>
+
+    <div id="contentContainer" class="syllabus-grid"></div>
+  </div>
+
+  <footer style="margin-top: 50px;">
+    <p class="animate-text">🚀 Dronacharya Juniors – build your future 🚀</p>
+  </footer>
+
+  <script>
+    // ========== PYQ DATABASE: BRANCH → YEAR → SEMESTER → SUBJECTS ==========
+    const baseUrl = 'https://ggnindia.dronacharya.info/QuestionPapers/Downloads/';
+    
+    const pyqData = {
+      // ========== 1st Year Branches ==========
+      "CSE AI & IoT (1st Year)": {
+        "1st Year": {
+          "Semester 1": [
+            { name: "Mathematics", link: baseUrl + "APS/Ist-Year/Mathematics.pdf" },
+            { name: "Physics", link: baseUrl + "APS/Ist-Year/Physics-2025.pdf" },
+            { name: "Basics of Electrical & Electronics", link: baseUrl + "APS/Ist-Year/Basics-electrical&electronics.pdf" },
+            { name: "Basics of Environmental Science", link: baseUrl + "APS/Ist-Year/Basics-Environmental-Science.pdf" },
+            { name: "Communication Skill in English", link: baseUrl + "APS/Ist-Year/Communication-skill-in-English.pdf" },
+            { name: "Data Structure Using C", link: baseUrl + "APS/Ist-Year/Data-Structure-Using-C.pdf" },
+            { name: "Electronics Engineering", link: baseUrl + "APS/Ist-Year/Electronics-Engineering.pdf" },
+            { name: "Engineering Mechanics", link: baseUrl + "APS/Ist-Year/Engineering-Mechanics.pdf" },
+            { name: "Human Value & Soft Skill", link: baseUrl + "APS/Ist-Year/Human-Value-Soft-Skill.pdf" },
+            { name: "Material Science", link: baseUrl + "APS/Ist-Year/Material-Science.pdf" },
+            { name: "Programming for Problem Solving Using C", link: baseUrl + "APS/Ist-Year/Programming-Problem-Solving-Using-C.pdf" },
+            { name: "Python Programming", link: baseUrl + "APS/Ist-Year/Python-Programming.pdf" }
+          ],
+          "Semester 2": [
+            { name: "Semester 2 subjects coming soon", link: "#" }
+          ]
+        }
+      },
+      "VLSI (ECE/EEE 1st Year)": {
+        "1st Year": {
+          "Semester 1": [
+            { name: "Mathematics", link: baseUrl + "APS/Ist-Year/Mathematics.pdf" },
+            { name: "Physics", link: baseUrl + "APS/Ist-Year/Physics-2025.pdf" },
+            { name: "Basics of Electrical & Electronics", link: baseUrl + "APS/Ist-Year/Basics-electrical&electronics.pdf" },
+            { name: "Basics of Environmental Science", link: baseUrl + "APS/Ist-Year/Basics-Environmental-Science.pdf" },
+            { name: "Communication Skill in English", link: baseUrl + "APS/Ist-Year/Communication-skill-in-English.pdf" },
+            { name: "Data Structure Using C", link: baseUrl + "APS/Ist-Year/Data-Structure-Using-C.pdf" },
+            { name: "Electronics Engineering", link: baseUrl + "APS/Ist-Year/Electronics-Engineering.pdf" },
+            { name: "Engineering Mechanics", link: baseUrl + "APS/Ist-Year/Engineering-Mechanics.pdf" },
+            { name: "Human Value & Soft Skill", link: baseUrl + "APS/Ist-Year/Human-Value-Soft-Skill.pdf" },
+            { name: "Material Science", link: baseUrl + "APS/Ist-Year/Material-Science.pdf" },
+            { name: "Programming for Problem Solving Using C", link: baseUrl + "APS/Ist-Year/Programming-Problem-Solving-Using-C.pdf" },
+            { name: "Python Programming", link: baseUrl + "APS/Ist-Year/Python-Programming.pdf" }
+          ],
+          "Semester 2": [{ name: "Semester 2 subjects coming soon", link: "#" }]
+        }
+      },
+      "ME/AE (1st Year)": {
+        "1st Year": {
+          "Semester 1": [
+            { name: "Mathematics", link: baseUrl + "APS/Ist-Year/Mathematics.pdf" },
+            { name: "Physics", link: baseUrl + "APS/Ist-Year/Physics-2025.pdf" },
+            { name: "Basics of Electrical & Electronics", link: baseUrl + "APS/Ist-Year/Basics-electrical&electronics.pdf" },
+            { name: "Basics of Environmental Science", link: baseUrl + "APS/Ist-Year/Basics-Environmental-Science.pdf" },
+            { name: "Communication Skill in English", link: baseUrl + "APS/Ist-Year/Communication-skill-in-English.pdf" },
+            { name: "Data Structure Using C", link: baseUrl + "APS/Ist-Year/Data-Structure-Using-C.pdf" },
+            { name: "Electronics Engineering", link: baseUrl + "APS/Ist-Year/Electronics-Engineering.pdf" },
+            { name: "Engineering Mechanics", link: baseUrl + "APS/Ist-Year/Engineering-Mechanics.pdf" },
+            { name: "Human Value & Soft Skill", link: baseUrl + "APS/Ist-Year/Human-Value-Soft-Skill.pdf" },
+            { name: "Material Science", link: baseUrl + "APS/Ist-Year/Material-Science.pdf" },
+            { name: "Programming for Problem Solving Using C", link: baseUrl + "APS/Ist-Year/Programming-Problem-Solving-Using-C.pdf" },
+            { name: "Python Programming", link: baseUrl + "APS/Ist-Year/Python-Programming.pdf" }
+          ],
+          "Semester 2": [{ name: "Semester 2 subjects coming soon", link: "#" }]
+        }
+      },
+
+      // ========== 2nd Year Branches ==========
+      "AI/ML (2nd Year)": {
+        "2nd Year": {
+          "Semester 3": [
+            { name: "Advance Data Structure", link: baseUrl + "AIML/3rd-Sem/Advance-Data-Structure.pdf" },
+            { name: "Artificial Intelligence", link: baseUrl + "AIML/3rd-Sem/Artificial-Intelligence.pdf" },
+            { name: "DBMS With SQL", link: baseUrl + "AIML/3rd-Sem/DBMS-With-SQL.pdf" },
+            { name: "Digital Electronics", link: baseUrl + "AIML/3rd-Sem/Digital-Electronics.pdf" },
+            { name: "Introduction to AI & ML", link: baseUrl + "AIML/3rd-Sem/Introduction-to-AI-and-ML.pdf" },
+            { name: "Programming for Data Science and AIML", link: baseUrl + "AIML/3rd-Sem/Programming-for-Data-Science-and-AIML.pdf" }
+          ],
+          "Semester 4": [
+            { name: "Computer Organization And Architecture", link: baseUrl + "CSE/4th-Sem/Computer-Organization-And-Architecture.pdf" },
+            { name: "Discrete Mathematics", link: baseUrl + "CSE/4th-Sem/Discrete-Mathematics.pdf" },
+            { name: "Introduction to Internet of Things", link: baseUrl + "CSE/4th-Sem/Introduction-to-Internet-of-Things.pdf" },
+            { name: "Microprocessor and Microcontroller", link: baseUrl + "CSE/4th-Sem/Microprocessor-and-Microcontroller.pdf" },
+            { name: "Operating System", link: baseUrl + "CSE/4th-Sem/Operating-System.pdf" },
+            { name: "Programming In Java", link: baseUrl + "CSE/4th-Sem/Programming-In-Java.pdf" },
+            { name: "R Programming", link: baseUrl + "CSE/4th-Sem/R-Programming.pdf" }
+          ]
+        }
+      },
+      "CSE (2nd Year)": {
+        "2nd Year": {
+          "Semester 3": [
+            { name: "Computer Organization And Architecture", link: baseUrl + "CSE/3rd-Sem/Computer-Organization-And-Architecture.pdf" },
+            { name: "Discrete Mathematics", link: baseUrl + "CSE/3rd-Sem/Discrete-Mathematics.pdf" },
+            { name: "Introduction to Internet of Things", link: baseUrl + "CSE/3rd-Sem/Introduction-to-Internet-of-Things.pdf" },
+            { name: "Microprocessor and Microcontroller", link: baseUrl + "CSE/3rd-Sem/Microprocessor-and-Microcontroller.pdf" },
+            { name: "Operating System", link: baseUrl + "CSE/3rd-Sem/Operating-System.pdf" },
+            { name: "Programming In Java", link: baseUrl + "CSE/3rd-Sem/Programming-In-Java.pdf" },
+            { name: "R Programming", link: baseUrl + "CSE/3rd-Sem/R-Programming.pdf" }
+          ],
+          "Semester 4": [
+            { name: "Computer Organization And Architecture", link: baseUrl + "CSE/4th-Sem/Computer-Organization-And-Architecture.pdf" },
+            { name: "Discrete Mathematics", link: baseUrl + "CSE/4th-Sem/Discrete-Mathematics.pdf" },
+            { name: "Introduction to Internet of Things", link: baseUrl + "CSE/4th-Sem/Introduction-to-Internet-of-Things.pdf" },
+            { name: "Microprocessor and Microcontroller", link: baseUrl + "CSE/4th-Sem/Microprocessor-and-Microcontroller.pdf" },
+            { name: "Operating System", link: baseUrl + "CSE/4th-Sem/Operating-System.pdf" },
+            { name: "Programming In Java", link: baseUrl + "CSE/4th-Sem/Programming-In-Java.pdf" },
+            { name: "R Programming", link: baseUrl + "CSE/4th-Sem/R-Programming.pdf" }
+          ]
+        }
+      },
+      "CSIT (2nd Year)": {
+        "2nd Year": {
+          "Semester 3": [
+            { name: "Computer Organization And Architecture", link: baseUrl + "CSE/3rd-Sem/Computer-Organization-And-Architecture.pdf" },
+            { name: "Discrete Mathematics", link: baseUrl + "CSE/3rd-Sem/Discrete-Mathematics.pdf" },
+            { name: "Introduction to Internet of Things", link: baseUrl + "CSE/3rd-Sem/Introduction-to-Internet-of-Things.pdf" },
+            { name: "Microprocessor and Microcontroller", link: baseUrl + "CSE/3rd-Sem/Microprocessor-and-Microcontroller.pdf" },
+            { name: "Operating System", link: baseUrl + "CSE/3rd-Sem/Operating-System.pdf" },
+            { name: "Programming In Java", link: baseUrl + "CSE/3rd-Sem/Programming-In-Java.pdf" },
+            { name: "R Programming", link: baseUrl + "CSE/3rd-Sem/R-Programming.pdf" }
+          ],
+          "Semester 4": [
+            { name: "Computer Organization And Architecture", link: baseUrl + "CSE/4th-Sem/Computer-Organization-And-Architecture.pdf" },
+            { name: "Discrete Mathematics", link: baseUrl + "CSE/4th-Sem/Discrete-Mathematics.pdf" },
+            { name: "Introduction to Internet of Things", link: baseUrl + "CSE/4th-Sem/Introduction-to-Internet-of-Things.pdf" },
+            { name: "Microprocessor and Microcontroller", link: baseUrl + "CSE/4th-Sem/Microprocessor-and-Microcontroller.pdf" },
+            { name: "Operating System", link: baseUrl + "CSE/4th-Sem/Operating-System.pdf" },
+            { name: "Programming In Java", link: baseUrl + "CSE/4th-Sem/Programming-In-Java.pdf" },
+            { name: "R Programming", link: baseUrl + "CSE/4th-Sem/R-Programming.pdf" }
+          ]
+        }
+      },
+      "ECE (2nd Year)": {
+        "2nd Year": {
+          "Semester 3": [
+            { name: "Electromagnetic Field Theory", link: baseUrl + "ECE/3rd-Sem/Electromagnetic-Field-Theory.pdf" },
+            { name: "Mathematical and Computational Techniques", link: baseUrl + "ECE/3rd-Sem/Mathematical-and-Computational-Techniques.pdf" },
+            { name: "Probability Theory and Stochastic Processes", link: baseUrl + "ECE/3rd-Sem/Probability-Theory-and-Stochastic-Processes.pdf" },
+            { name: "Analog and Digital Communication Systems", link: baseUrl + "ECE/3rd-Sem/Analog-and-Digital-Communication-Systems.pdf" },
+            { name: "Network Analysis and Synthesis", link: baseUrl + "ECE/3rd-Sem/Network-Analysis-and-Synthesis.pdf" }
+          ],
+          "Semester 4": [
+            { name: "Probability Theory and Stochastic Processes", link: baseUrl + "ECE/4th-Sem/Probability-Theory-and-Stochastic-Processes.pdf" },
+            { name: "Electronic Measurement and Instrumentation", link: baseUrl + "ECE/4th-Sem/Electronic-Measurement-and-Instrumentation.pdf" },
+            { name: "Computer Organization and Architecture", link: baseUrl + "ECE/4th-Sem/Computer-Organization-and-Architecture.pdf" },
+            { name: "Digital and Data Communications", link: baseUrl + "ECE/4th-Sem/Digital-and-Data-Communications.pdf" },
+            { name: "Internet of Things", link: baseUrl + "ECE/4th-Sem/Internet-of-Things.pdf" },
+            { name: "Microprocessors and Interfacing", link: baseUrl + "ECE/4th-Sem/Microprocessors-and-Interfacing.pdf" }
+          ]
+        }
+      },
+      "ECS (2nd Year)": {
+        "2nd Year": {
+          "Semester 3": [
+            { name: "Electromagnetic Field Theory", link: baseUrl + "ECE/3rd-Sem/Electromagnetic-Field-Theory.pdf" },
+            { name: "Mathematical and Computational Techniques", link: baseUrl + "ECE/3rd-Sem/Mathematical-and-Computational-Techniques.pdf" },
+            { name: "Probability Theory and Stochastic Processes", link: baseUrl + "ECE/3rd-Sem/Probability-Theory-and-Stochastic-Processes.pdf" },
+            { name: "Analog and Digital Communication Systems", link: baseUrl + "ECE/3rd-Sem/Analog-and-Digital-Communication-Systems.pdf" },
+            { name: "Network Analysis and Synthesis", link: baseUrl + "ECE/3rd-Sem/Network-Analysis-and-Synthesis.pdf" }
+          ],
+          "Semester 4": [
+            { name: "Probability Theory and Stochastic Processes", link: baseUrl + "ECE/4th-Sem/Probability-Theory-and-Stochastic-Processes.pdf" },
+            { name: "Electronic Measurement and Instrumentation", link: baseUrl + "ECE/4th-Sem/Electronic-Measurement-and-Instrumentation.pdf" },
+            { name: "Computer Organization and Architecture", link: baseUrl + "ECE/4th-Sem/Computer-Organization-and-Architecture.pdf" },
+            { name: "Digital and Data Communications", link: baseUrl + "ECE/4th-Sem/Digital-and-Data-Communications.pdf" },
+            { name: "Internet of Things", link: baseUrl + "ECE/4th-Sem/Internet-of-Things.pdf" },
+            { name: "Microprocessors and Interfacing", link: baseUrl + "ECE/4th-Sem/Microprocessors-and-Interfacing.pdf" }
+          ]
+        }
+      },
+      "EEE (2nd Year)": {
+        "2nd Year": {
+          "Semester 3": [
+            { name: "Digital Electronics", link: baseUrl + "EEE/3rd-Sem/Digital-Electronics.pdf" },
+            { name: "Electrical Machine I", link: baseUrl + "EEE/3rd-Sem/Electrical-Machine-I.pdf" },
+            { name: "Network Analysis and Synthesis", link: baseUrl + "EEE/3rd-Sem/Network-Analysis-and-Synthesis.pdf" },
+            { name: "Electromagnetic Field Theory", link: baseUrl + "EEE/3rd-Sem/Electromagnetic-Field-Theory.pdf" },
+            { name: "Signals And Systems", link: baseUrl + "EEE/3rd-Sem/Signals-And-Systems.pdf" }
+          ],
+          "Semester 4": [
+            { name: "Electrical Engineering Materials", link: baseUrl + "EEE/4th-Sem/Electrical-Engineering-Materials.pdf" },
+            { name: "Electronic Measurement and Instrumentation", link: baseUrl + "EEE/4th-Sem/Electronic-Measurement-and-Instrumentation.pdf" },
+            { name: "Power Electronics", link: baseUrl + "EEE/4th-Sem/Power-Electronics.pdf" },
+            { name: "Probability Theory And Stochastic Process", link: baseUrl + "EEE/4th-Sem/Probability-Theory-And-Stochastic-Process.pdf" },
+            { name: "Transmission and Distribution", link: baseUrl + "EEE/4th-Sem/Transmission-and-Distribution.pdf" }
+          ]
+        }
+      },
+      "ME (2nd Year)": {
+        "2nd Year": {
+          "Semester 3": [
+            { name: "Economics for Engineers", link: baseUrl + "ME/3rd-Sem/Economics-for-Engineers.pdf" },
+            { name: "Engineering Mechanics", link: baseUrl + "ME/3rd-Sem/Engineering-Mechanics.pdf" },
+            { name: "Fluid Mechanics", link: baseUrl + "ME/3rd-Sem/Fluid-Mechanics.pdf" },
+            { name: "Industrial Automation", link: baseUrl + "ME/3rd-Sem/Industrial-Automation.pdf" },
+            { name: "Production Process-I", link: baseUrl + "ME/3rd-Sem/Production-Process-I.pdf" },
+            { name: "Strength of Materials", link: baseUrl + "ME/3rd-Sem/Strength-of-Materials.pdf" },
+            { name: "Thermodynamics", link: baseUrl + "ME/3rd-Sem/Thermodynamics.pdf" }
+          ],
+          "Semester 4": [
+            { name: "Applied Thermodynamics", link: baseUrl + "ME/4th-Sem/Applied-Thermodynamics.pdf" },
+            { name: "Computer Aided Design and Manufacturing", link: baseUrl + "ME/4th-Sem/Computer-Aided-Design-and-Manufacturing.pdf" },
+            { name: "Fluid Mechanics-II", link: baseUrl + "ME/4th-Sem/Fluid-Mechanics-II.pdf" },
+            { name: "Instrumentation and Control", link: baseUrl + "ME/4th-Sem/Instrumentation-and-Control.pdf" },
+            { name: "Kinematics of Machine", link: baseUrl + "ME/4th-Sem/Kinematics-of-Machine.pdf" },
+            { name: "Machine Tools And Machining", link: baseUrl + "ME/4th-Sem/Machine-Tools-And-Machining.pdf" },
+            { name: "Organization Behaviour", link: baseUrl + "ME/4th-Sem/Organization-Behaviour.pdf" },
+            { name: "Production Process -II", link: baseUrl + "ME/4th-Sem/Production-Process-II.pdf" }
+          ]
+        }
+      },
+      "IoT (2nd Year)": {
+        "2nd Year": {
+          "Semester 3": [
+            { name: "Foundation of Blockchain Technology", link: baseUrl + "IOT/3rd-Sem/Foundation-of-Blockchain-Technology.pdf" },
+            { name: "Mathematics - III", link: baseUrl + "IOT/3rd-Sem/Mathematics-III.pdf" },
+            { name: "Computer Organization And Architecture", link: baseUrl + "CSE/3rd-Sem/Computer-Organization-And-Architecture.pdf" },
+            { name: "Discrete Mathematics", link: baseUrl + "CSE/3rd-Sem/Discrete-Mathematics.pdf" },
+            { name: "Introduction to Internet of Things", link: baseUrl + "CSE/3rd-Sem/Introduction-to-Internet-of-Things.pdf" },
+            { name: "Microprocessor and Microcontroller", link: baseUrl + "CSE/3rd-Sem/Microprocessor-and-Microcontroller.pdf" },
+            { name: "Operating System", link: baseUrl + "CSE/3rd-Sem/Operating-System.pdf" },
+            { name: "Programming In Java", link: baseUrl + "CSE/3rd-Sem/Programming-In-Java.pdf" },
+            { name: "R Programming", link: baseUrl + "CSE/3rd-Sem/R-Programming.pdf" }
+          ],
+          "Semester 4": [
+            { name: "Computer Organization And Architecture", link: baseUrl + "CSE/4th-Sem/Computer-Organization-And-Architecture.pdf" },
+            { name: "Discrete Mathematics", link: baseUrl + "CSE/4th-Sem/Discrete-Mathematics.pdf" },
+            { name: "Introduction to Internet of Things", link: baseUrl + "CSE/4th-Sem/Introduction-to-Internet-of-Things.pdf" },
+            { name: "Microprocessor and Microcontroller", link: baseUrl + "CSE/4th-Sem/Microprocessor-and-Microcontroller.pdf" },
+            { name: "Operating System", link: baseUrl + "CSE/4th-Sem/Operating-System.pdf" },
+            { name: "Programming In Java", link: baseUrl + "CSE/4th-Sem/Programming-In-Java.pdf" },
+            { name: "R Programming", link: baseUrl + "CSE/4th-Sem/R-Programming.pdf" }
+          ]
+        }
+      },
+      "RAA (2nd Year)": {
+        "2nd Year": {
+          "Semester 3": [
+            { name: "Digital Electronics", link: baseUrl + "RAA/3rd-Sem/Digital-Electronics.pdf" },
+            { name: "Electronic Devices and Circuits", link: baseUrl + "RAA/3rd-Sem/Electronic-Devices-and-Circuits.pdf" }
+          ],
+          "Semester 4": [
+            { name: "Power Electronics and Drives", link: baseUrl + "RAA/4th-Sem/Power-Electronics-and-Drives.pdf" },
+            { name: "Machine Elements Design", link: baseUrl + "RAA/4th-Sem/Machine-Elements-Design.pdf" },
+            { name: "Control System Engineering", link: baseUrl + "RAA/4th-Sem/Control-System-Engineering.pdf" },
+            { name: "Statistics And Numerical Methods", link: baseUrl + "RAA/4th-Sem/Statistics-And-Numerical-Methods.pdf" }
+          ]
+        }
+      },
+
+      // ========== 3rd Year Branches ==========
+      "AI/ML (3rd Year)": {
+        "3rd Year": {
+          "Semester 5": [
+            { name: "Formal Languages and Automata Theory", link: baseUrl + "AIML/5th-Sem/Formal-Languages-and-Automata-Theory.pdf" },
+            { name: "Machine Learning and its Applications", link: baseUrl + "AIML/5th-Sem/Machine-Learning-and-its-Applications.pdf" },
+            { name: "Predictive Analytics", link: baseUrl + "AIML/5th-Sem/Predictive-Analytics.pdf" },
+            { name: "Computer Networks", link: baseUrl + "AIML/5th-Sem/Computer-Networks.pdf" }
+          ],
+          "Semester 6": [
+            { name: "Deep Learning", link: baseUrl + "AIML/6th-Sem/Deep-Learning.pdf" },
+            { name: "Advanced Database Management Systems", link: baseUrl + "AIML/6th-Sem/Advanced-Database-Management-Systems.pdf" },
+            { name: "Cloud Computing", link: baseUrl + "AIML/6th-Sem/Cloud-Computing.pdf" },
+            { name: "Compiler Design", link: baseUrl + "AIML/6th-Sem/Compiler-Design.pdf" },
+            { name: "Network Security and Cryptography", link: baseUrl + "AIML/6th-Sem/Network-Security-and-Cryptography.pdf" },
+            { name: "Soft Computing", link: baseUrl + "AIML/6th-Sem/Soft-Computing.pdf" },
+            { name: "Software Testing", link: baseUrl + "AIML/6th-Sem/Software-Testing.pdf" },
+            { name: "Statistical Computing", link: baseUrl + "AIML/6th-Sem/Statistical-Computing.pdf" }
+          ]
+        }
+      },
+      "CSE (3rd Year)": {
+        "3rd Year": {
+          "Semester 5": [
+            { name: "Big Data Analytics", link: baseUrl + "CSE/5th-Sem/Big-Data-Analytics.pdf" },
+            { name: "Computer Networks", link: baseUrl + "CSE/5th-Sem/Computer-Networks.pdf" },
+            { name: "Cryptocurrency With Ethereum", link: baseUrl + "CSE/5th-Sem/Cryptocurrency-With-Ethereum.pdf" },
+            { name: "Design and Analysis of Algorithms", link: baseUrl + "CSE/5th-Sem/Design-and-Analysis-of-Algorithms.pdf" },
+            { name: "Software Engineering", link: baseUrl + "CSE/5th-Sem/Software-Engineering.pdf" },
+            { name: "Web Technology", link: baseUrl + "CSE/5th-Sem/Web-Technology.pdf" }
+          ],
+          "Semester 6": [
+            { name: "Advanced Database Management Systems", link: baseUrl + "CSE/6th-Sem/Advanced-Database-Management-Systems.pdf" },
+            { name: "Technical English and Report Writing", link: baseUrl + "CSE/6th-Sem/Technical-English-and-Report-Writing.pdf" },
+            { name: "Advanced Java Programming", link: baseUrl + "CSE/6th-Sem/Advanced-Java-Programming.pdf" },
+            { name: "Cloud Computing", link: baseUrl + "CSE/6th-Sem/Cloud-Computing.pdf" },
+            { name: "Compiler Design", link: baseUrl + "CSE/6th-Sem/Compiler-Design.pdf" },
+            { name: "Disaster Management", link: baseUrl + "CSE/6th-Sem/Disaster-Management.pdf" },
+            { name: "Machine Learning and Its Applications", link: baseUrl + "CSE/6th-Sem/Machine-Learning-and-Its-Applications.pdf" },
+            { name: "Soft Computing", link: baseUrl + "CSE/6th-Sem/Soft-Computing.pdf" },
+            { name: "Software Testing", link: baseUrl + "CSE/6th-Sem/Software-Testing.pdf" }
+          ]
+        }
+      },
+      "CSIT (3rd Year)": {
+        "3rd Year": {
+          "Semester 5": [
+            { name: "Big Data Analytics", link: baseUrl + "CSE/5th-Sem/Big-Data-Analytics.pdf" },
+            { name: "Computer Networks", link: baseUrl + "CSE/5th-Sem/Computer-Networks.pdf" },
+            { name: "Cryptocurrency With Ethereum", link: baseUrl + "CSE/5th-Sem/Cryptocurrency-With-Ethereum.pdf" },
+            { name: "Design and Analysis of Algorithms", link: baseUrl + "CSE/5th-Sem/Design-and-Analysis-of-Algorithms.pdf" },
+            { name: "Software Engineering", link: baseUrl + "CSE/5th-Sem/Software-Engineering.pdf" },
+            { name: "Web Technology", link: baseUrl + "CSE/5th-Sem/Web-Technology.pdf" }
+          ],
+          "Semester 6": [
+            { name: "Advanced Database Management Systems", link: baseUrl + "CSE/6th-Sem/Advanced-Database-Management-Systems.pdf" },
+            { name: "Technical English and Report Writing", link: baseUrl + "CSE/6th-Sem/Technical-English-and-Report-Writing.pdf" },
+            { name: "Advanced Java Programming", link: baseUrl + "CSE/6th-Sem/Advanced-Java-Programming.pdf" },
+            { name: "Cloud Computing", link: baseUrl + "CSE/6th-Sem/Cloud-Computing.pdf" },
+            { name: "Compiler Design", link: baseUrl + "CSE/6th-Sem/Compiler-Design.pdf" },
+            { name: "Disaster Management", link: baseUrl + "CSE/6th-Sem/Disaster-Management.pdf" },
+            { name: "Machine Learning and Its Applications", link: baseUrl + "CSE/6th-Sem/Machine-Learning-and-Its-Applications.pdf" },
+            { name: "Soft Computing", link: baseUrl + "CSE/6th-Sem/Soft-Computing.pdf" },
+            { name: "Software Testing", link: baseUrl + "CSE/6th-Sem/Software-Testing.pdf" }
+          ]
+        }
+      },
+      "ECE (3rd Year)": {
+        "3rd Year": {
+          "Semester 5": [
+            { name: "Analog Integrated Circuit", link: baseUrl + "ECE/5th-Sem/Analog-Integrated-Circuit.pdf" },
+            { name: "Wireless and Satellite Communication", link: baseUrl + "ECE/5th-Sem/Wireless-and-Satellite-Communication.pdf" }
+          ],
+          "Semester 6": [
+            { name: "Control System Engineering", link: baseUrl + "ECE/6th-Sem/Control-System-Engineering.pdf" },
+            { name: "Microwave and Radar Engineering", link: baseUrl + "ECE/6th-Sem/Microwave-and-Radar-Engineering.pdf" },
+            { name: "Mobile Communication", link: baseUrl + "ECE/6th-Sem/Mobile-Communication.pdf" },
+            { name: "Nano-Electronics", link: baseUrl + "ECE/6th-Sem/Nano-Electronics.pdf" },
+            { name: "VLSI System Design", link: baseUrl + "ECE/6th-Sem/VLSI-System-Design.pdf" },
+            { name: "Wireless Sensor Network", link: baseUrl + "ECE/6th-Sem/Wireless-Sensor-Network.pdf" }
+          ]
+        }
+      },
+      "ECS (3rd Year)": {
+        "3rd Year": {
+          "Semester 5": [
+            { name: "Analog Integrated Circuit", link: baseUrl + "ECE/5th-Sem/Analog-Integrated-Circuit.pdf" },
+            { name: "Wireless and Satellite Communication", link: baseUrl + "ECE/5th-Sem/Wireless-and-Satellite-Communication.pdf" }
+          ],
+          "Semester 6": [
+            { name: "Control System Engineering", link: baseUrl + "ECE/6th-Sem/Control-System-Engineering.pdf" },
+            { name: "Microwave and Radar Engineering", link: baseUrl + "ECE/6th-Sem/Microwave-and-Radar-Engineering.pdf" },
+            { name: "Mobile Communication", link: baseUrl + "ECE/6th-Sem/Mobile-Communication.pdf" },
+            { name: "Nano-Electronics", link: baseUrl + "ECE/6th-Sem/Nano-Electronics.pdf" },
+            { name: "VLSI System Design", link: baseUrl + "ECE/6th-Sem/VLSI-System-Design.pdf" },
+            { name: "Wireless Sensor Network", link: baseUrl + "ECE/6th-Sem/Wireless-Sensor-Network.pdf" }
+          ]
+        }
+      },
+      "EEE (3rd Year)": {
+        "3rd Year": {
+          "Semester 5": [
+            { name: "Communication Systems", link: baseUrl + "EEE/5th-Sem/Communication-Systems.pdf" },
+            { name: "Digital Signal Processing", link: baseUrl + "EEE/5th-Sem/Digital-Signal-Processing.pdf" },
+            { name: "Digital Systems Design", link: baseUrl + "EEE/5th-Sem/Digital-Systems-Design.pdf" },
+            { name: "Power System-I", link: baseUrl + "EEE/5th-Sem/Power-System-I.pdf" },
+            { name: "VLSI", link: baseUrl + "EEE/5th-Sem/VLSI.pdf" }
+          ],
+          "Semester 6": [
+            { name: "Control System", link: baseUrl + "EEE/6th-Sem/Control-System.pdf" },
+            { name: "Microprocessors and Microcontrollers", link: baseUrl + "EEE/6th-Sem/Microprocessors-and-Microcontrollers.pdf" },
+            { name: "Mobile Communication", link: baseUrl + "EEE/6th-Sem/Mobile-Communication.pdf" },
+            { name: "Power System - II", link: baseUrl + "EEE/6th-Sem/Power-System-II.pdf" },
+            { name: "Wireless Sensor Network", link: baseUrl + "EEE/6th-Sem/Wireless-Sensor-Network.pdf" }
+          ]
+        }
+      },
+      "ME (3rd Year)": {
+        "3rd Year": {
+          "Semester 5": [
+            { name: "CNC Machine And Metrology", link: baseUrl + "ME/5th-Sem/CNC-Machine-And-Metrology.pdf" },
+            { name: "Design of Machine Element-I", link: baseUrl + "ME/5th-Sem/Design-of-Machine-Element-I.pdf" },
+            { name: "Disaster Management", link: baseUrl + "ME/5th-Sem/Disaster-Management.pdf" }
+          ],
+          "Semester 6": [
+            { name: "Additive Manufacturing", link: baseUrl + "ME/6th-Sem/Additive-Manufacturing.pdf" },
+            { name: "Design of Machine Element- II", link: baseUrl + "ME/6th-Sem/Design-of-Machine-Element-II.pdf" },
+            { name: "Entrepreneurship Development", link: baseUrl + "ME/6th-Sem/Entrepreneurship-Development.pdf" },
+            { name: "Industrial Safety", link: baseUrl + "ME/6th-Sem/Industrial-Safety.pdf" },
+            { name: "Operation Research", link: baseUrl + "ME/6th-Sem/Operation-Research.pdf" }
+          ]
+        }
+      },
+      "IoT (3rd Year)": {
+        "3rd Year": {
+          "Semester 5": [
+            { name: "Internet of things and Cyber Security Including Block Chain Technology", link: baseUrl + "IOT/5th-Sem/Internet-of-things-and-Cyber-Security-Including-Block-Chain-Technology.pdf" },
+            { name: "R-Programming", link: baseUrl + "IOT/5th-Sem/R-Programming.pdf" },
+            { name: "Big Data Analytics", link: baseUrl + "CSE/5th-Sem/Big-Data-Analytics.pdf" },
+            { name: "Computer Networks", link: baseUrl + "CSE/5th-Sem/Computer-Networks.pdf" },
+            { name: "Cryptocurrency With Ethereum", link: baseUrl + "CSE/5th-Sem/Cryptocurrency-With-Ethereum.pdf" },
+            { name: "Design and Analysis of Algorithms", link: baseUrl + "CSE/5th-Sem/Design-and-Analysis-of-Algorithms.pdf" },
+            { name: "Software Engineering", link: baseUrl + "CSE/5th-Sem/Software-Engineering.pdf" },
+            { name: "Web Technology", link: baseUrl + "CSE/5th-Sem/Web-Technology.pdf" }
+          ],
+          "Semester 6": [
+            { name: "Advanced Database Management Systems", link: baseUrl + "CSE/6th-Sem/Advanced-Database-Management-Systems.pdf" },
+            { name: "Technical English and Report Writing", link: baseUrl + "CSE/6th-Sem/Technical-English-and-Report-Writing.pdf" },
+            { name: "Advanced Java Programming", link: baseUrl + "CSE/6th-Sem/Advanced-Java-Programming.pdf" },
+            { name: "Cloud Computing", link: baseUrl + "CSE/6th-Sem/Cloud-Computing.pdf" },
+            { name: "Compiler Design", link: baseUrl + "CSE/6th-Sem/Compiler-Design.pdf" },
+            { name: "Disaster Management", link: baseUrl + "CSE/6th-Sem/Disaster-Management.pdf" },
+            { name: "Machine Learning and Its Applications", link: baseUrl + "CSE/6th-Sem/Machine-Learning-and-Its-Applications.pdf" },
+            { name: "Soft Computing", link: baseUrl + "CSE/6th-Sem/Soft-Computing.pdf" },
+            { name: "Software Testing", link: baseUrl + "CSE/6th-Sem/Software-Testing.pdf" }
+          ]
+        }
+      },
+      "RAA (3rd Year)": {
+        "3rd Year": {
+          "Semester 5": [
+            { name: "Introduction of AL and ML", link: baseUrl + "RAA/5th-Sem/Introduction-of-AL-and-ML.pdf" },
+            { name: "Introduction to Robotics", link: baseUrl + "RAA/5th-Sem/Introduction-to-Robotics.pdf" },
+            { name: "Linear Integrated Circuits and Application", link: baseUrl + "RAA/5th-Sem/Linear-Integrated-Circuits-and-Application.pdf" },
+            { name: "Robotics And Automation Mechatronics", link: baseUrl + "RAA/5th-Sem/Robotics-And-Automation-Mechatronics.pdf" },
+            { name: "Sensors and Instrumentation", link: baseUrl + "RAA/5th-Sem/Sensors-and-Instrumentation.pdf" }
+          ],
+          "Semester 6": [
+            { name: "Automation System Design", link: baseUrl + "RAA/6th-Sem/Automation-System-Design.pdf" },
+            { name: "Hydraulic & Pneumatics", link: baseUrl + "RAA/6th-Sem/Hydraulic-and-Pneumatics.pdf" },
+            { name: "Software Engineering", link: baseUrl + "RAA/6th-Sem/Software-Engineering.pdf" }
+          ]
+        }
+      }
+    };
+
+    // Helper to populate common first-year subjects
+    const firstYearSubjects = [
+      { name: "Mathematics", link: baseUrl + "APS/Ist-Year/Mathematics.pdf" },
+      { name: "Physics", link: baseUrl + "APS/Ist-Year/Physics-2025.pdf" },
+      { name: "Basics of Electrical & Electronics", link: baseUrl + "APS/Ist-Year/Basics-electrical&electronics.pdf" },
+      { name: "Basics of Environmental Science", link: baseUrl + "APS/Ist-Year/Basics-Environmental-Science.pdf" },
+      { name: "Communication Skill in English", link: baseUrl + "APS/Ist-Year/Communication-skill-in-English.pdf" },
+      { name: "Data Structure Using C", link: baseUrl + "APS/Ist-Year/Data-Structure-Using-C.pdf" },
+      { name: "Electronics Engineering", link: baseUrl + "APS/Ist-Year/Electronics-Engineering.pdf" },
+      { name: "Engineering Mechanics", link: baseUrl + "APS/Ist-Year/Engineering-Mechanics.pdf" },
+      { name: "Human Value & Soft Skill", link: baseUrl + "APS/Ist-Year/Human-Value-Soft-Skill.pdf" },
+      { name: "Material Science", link: baseUrl + "APS/Ist-Year/Material-Science.pdf" },
+      { name: "Programming for Problem Solving Using C", link: baseUrl + "APS/Ist-Year/Programming-Problem-Solving-Using-C.pdf" },
+      { name: "Python Programming", link: baseUrl + "APS/Ist-Year/Python-Programming.pdf" }
+    ];
+
+    // Fill missing first-year subjects for branches that have empty arrays
+    const firstYearBranches = ["CSE AI & IoT (1st Year)", "VLSI (ECE/EEE 1st Year)", "ME/AE (1st Year)"];
+    firstYearBranches.forEach(branch => {
+      if (pyqData[branch] && pyqData[branch]["1st Year"]) {
+        if (!pyqData[branch]["1st Year"]["Semester 1"] || pyqData[branch]["1st Year"]["Semester 1"].length === 0) {
+          pyqData[branch]["1st Year"]["Semester 1"] = firstYearSubjects;
+        }
+        if (!pyqData[branch]["1st Year"]["Semester 2"]) {
+          pyqData[branch]["1st Year"]["Semester 2"] = [{ name: "Semester 2 subjects coming soon", link: "#" }];
+        }
+      }
+    });
+
+    // Navigation state
+    let currentBranch = null;
+    let currentYear = null;
+    let currentSemester = null;
+
+    const container = document.getElementById('contentContainer');
+    const mainTitle = document.getElementById('mainTitle');
+    const backContainer = document.getElementById('backContainer');
+    const backBtn = document.getElementById('backBtn');
+
+    function renderBranches() {
+      mainTitle.innerText = "Previous Year Papers – Select Branch";
+      backContainer.classList.add('hidden');
+      container.innerHTML = '';
+      for (let branch in pyqData) {
+        const div = document.createElement('div');
+        div.className = 'syllabus-item';
+        div.innerHTML = `<h4>${branch}</h4>`;
+        div.addEventListener('click', () => {
+          currentBranch = branch;
+          renderYears();
+        });
+        container.appendChild(div);
+      }
+    }
+
+    function renderYears() {
+      const branchData = pyqData[currentBranch];
+      mainTitle.innerText = `${currentBranch} – Select Year`;
+      backContainer.classList.remove('hidden');
+      backBtn.onclick = renderBranches;
+      container.innerHTML = '';
+      for (let year in branchData) {
+        const div = document.createElement('div');
+        div.className = 'syllabus-item';
+        div.innerHTML = `<h4>${year}</h4>`;
+        div.addEventListener('click', () => {
+          currentYear = year;
+          renderSemesters();
+        });
+        container.appendChild(div);
+      }
+    }
+
+    function renderSemesters() {
+      const yearData = pyqData[currentBranch][currentYear];
+      mainTitle.innerText = `${currentBranch} (${currentYear}) – Select Semester`;
+      backBtn.onclick = () => renderYears();
+      container.innerHTML = '';
+      for (let sem in yearData) {
+        const div = document.createElement('div');
+        div.className = 'syllabus-item';
+        div.innerHTML = `<h4>${sem}</h4>`;
+        div.addEventListener('click', () => {
+          currentSemester = sem;
+          renderSubjects();
+        });
+        container.appendChild(div);
+      }
+    }
+
+    function renderSubjects() {
+      const subjects = pyqData[currentBranch][currentYear][currentSemester];
+      mainTitle.innerText = `${currentBranch} – ${currentSemester} Papers`;
+      backBtn.onclick = () => renderSemesters();
+      container.innerHTML = '';
+      subjects.forEach(sub => {
+        const div = document.createElement('div');
+        div.className = 'subject-item';
+        div.innerHTML = `
+          <h4>${sub.name}</h4>
+          <a href="${sub.link}" target="_blank" class="subject-btn">VIEW PAPER</a>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    renderBranches();
+  </script>
+</body>
+</html>

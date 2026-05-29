@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syllabus – Dronacharya College</title>
+  <link rel="icon" type="image/png" href="finalicon.png"> <!-- or your college logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .page-header {
+      text-align: center;
+      margin: 40px 0 20px;
+    }
+    .back-home {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #0ff;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+    .back-home:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <nav style="position: static; margin-bottom: 20px;">
+    <a href="index.html" class="logo">
+      <img src="Screenshot 2026-03-01 110524.png" alt="Dronacharya College" style="height: 50px; width: auto;">
+    </a>
+    <div class="nav-links">
+      <a href="index.html#hero">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#resources">Resources</a>
+      <a href="index.html#events">Events</a>
+      <a href="index.html#holiday">Holidays</a>
+      <a href="index.html#guide">Guide</a>
+      <a href="index.html#games">Games</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="wrapper">
+    <div class="page-header">
+      <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Back to Home</a>
+      <h1 class="section-title">Syllabus – Select Branch & Year</h1>
+    </div>
+
+    <div class="syllabus-grid" id="syllabusGrid"></div>
+  </div>
+
+  <footer style="margin-top: 50px;">
+    <p class="animate-text">🚀 Dronacharya Juniors – build your future 🚀</p>
+  </footer>
+
+  <script>
+  // Define all syllabus items – update PDF paths as needed
+  const syllabusItems = [
+    { title: "CSE AI & IoT (1st Year)", pdf: "pdfs/syllabus/A1-Scheme-Syllabus-CSE-AI-IOT-CS-all-Computer-BTECH-1st-year-2022-23.pdf" },
+    { title: "VLSI (ECE/EEE 1st Year)", pdf: "pdfs/syllabus/A2-Scheme-Syllabus-VLSI-ECE-EEE-all Elect-BTECH-1st-year-2022-23.pdf" },
+    { title: "ME/AE (1st Year)", pdf: "pdfs/syllabus/A3-Scheme-Syllabus-ME-AE-all-ME-BTECH-1st-year-2022-23.pdf" },
+    { title: "CSE (2nd Year)", pdf: "pdfs/syllabus/CSE_Syllabus_2nd_Year_GU-30072024.pdf" },
+    { title: "CSE (3rd Year)", pdf: "pdfs/syllabus/CSE_Syllabus_3rd_Year_GU-30072024.pdf" },
+    { title: "CSIT (2nd Year)", pdf: "pdfs/syllabus/CSIT_Syllabus_2nd_Year_GU-30072024 (1).pdf" },
+    { title: "CSIT (3rd Year)", pdf: "pdfs/syllabus/CSIT_Syllabus_3rd_Year_GU-30072024.pdf" },
+    { title: "ECE (2nd Year)", pdf: "pdfs/syllabus/ECE_Syllabus_2nd_Year_GU-30072024.pdf" },
+    { title: "ECE (3rd Year)", pdf: "pdfs/syllabus/ECE_Syllabus_3rd_Year_GU-30072024.pdf" },
+    { title: "ECS (2nd Year)", pdf: "pdfs/syllabus/ECS_Syllabus_2nd_Year_GU-30072024.pdf" },
+    { title: "ECS (3rd Year)", pdf: "pdfs/syllabus/ECE_Syllabus_3rd_Year_GU-30072024.pdf" },
+    { title: "EEE (2nd Year)", pdf: "pdfs/syllabus/EEE_Syllabus_2nd_Year_GU-30072024.pdf" },
+    { title: "EEE (3rd Year)", pdf: "pdfs/syllabus/EEE_Syllabus_3rd_Year_GU-30072024.pdf" },
+    { title: "ME (2nd Year)", pdf: "pdfs/syllabus/ME_Syllabus_2nd_Year_GU-30072024.pdf" },
+    { title: "ME (3rd Year)", pdf: "pdfs/syllabus/ME_Scheme_3rd_Year_GU-30072024.pdf" },
+    { title: "AI/ML (2nd Year)", pdf: "pdfs/syllabus/AIML-Syllabus_2nd_Year_GU-30072024.pdf" },
+    { title: "AI/ML (3rd Year)", pdf: "pdfs/syllabus/AIML-Syllabus_3rd_Year_GU-30072024.pdf" },
+    { title: "IoT (2nd Year)", pdf: "pdfs/syllabus/IoT-Syllabus_2nd_Year_GU-30072024.pdf" },
+    { title: "IoT (3rd Year)", pdf: "pdfs/syllabus/IoT-Syllabus_3rd_Year_GU-30072024.pdf" },
+    { title: "RAA (2nd Year)", pdf: "pdfs/syllabus/RAA-Syllabus_2nd_Year_GU-30072024.pdf" },
+    { title: "RAA (3rd Year)", pdf: "pdfs/syllabus/RAA-Syllabus_3rd_Year_GU-30072024.pdf" }
+  ];
+
+  const grid = document.getElementById('syllabusGrid');
+  syllabusItems.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'syllabus-item';
+    div.innerHTML = `
+      <h4>${item.title}</h4>
+      <a href="${item.pdf}" target="_blank" class="syllabus-btn">VIEW SYLLABUS</a>
+    `;
+    grid.appendChild(div);
+  });
+</script>
+</body>
+</html>

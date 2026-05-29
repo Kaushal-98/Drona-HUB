@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dronacharya College – Junior Help Portal</title>
+  
+ 
+
+  
+  <link rel="icon" type="image/png" href="finalicon.png">
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@300;400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+
+  
+<style>
+  #featurePreloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0b0f15;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease;
+  }
+  .slideshow-container {
+    width: 100%;
+    max-width: 800px;
+    height: 60vh;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(43, 44, 44, 0.3);
+  }
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+  }
+  .slide.active {
+    opacity: 1;
+  }
+  .slide-content {
+    max-width: 600px;
+    color: white;
+    text-shadow: 0 0 10px rgba(233, 7, 7, 0.5);
+  }
+  .slide-content h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #0ff, #f0f);
+    
+    -webkit-text-fill-color: transparent;
+  }
+  .slide-content p {
+    font-size: 1.4rem;
+    opacity: 0.9;
+  }
+  .slideshow-footer {
+    margin-top: 30px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    color: #0ff;
+    font-size: 1.2rem;
+  }
+  #skipSlideshow {
+    background: transparent;
+    border: 2px solid #0ff;
+    color: #0ff;
+    padding: 10px 25px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+  }
+  #skipSlideshow:hover {
+    background: #0ff;
+    color: #000;
+    box-shadow: 0 0 20px cyan;
+  }
+  @media (max-width: 600px) {
+    .slide-content h2 { font-size: 2rem; }
+    .slide-content p { font-size: 1rem; }
+    .slideshow-container { height: 50vh; }
+  }
+</style>
+
+<script>
+  (function() {
+    const preloader = document.getElementById('featurePreloader');
+    const slides = document.querySelectorAll('.slide');
+    const indicator = document.getElementById('slideIndicator');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let slideInterval;
+
+    function showSlide(index) {
+      slides.forEach(s => s.classList.remove('active'));
+      slides[index].classList.add('active');
+      indicator.textContent = (index + 1) + ' / ' + totalSlides;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    function startSlideshow() {
+      slideInterval = setInterval(nextSlide, 3000); // change slide every 3 seconds
+    }
+
+    // Hide preloader and show main content
+    function finishSlideshow() {
+      clearInterval(slideInterval);
+      preloader.style.opacity = '0';
+      setTimeout(() => {
+        preloader.style.display = 'none';
+        document.body.style.overflow = 'auto'; // enable scrolling if it was disabled
+      }, 800);
+    }
+
+    // Auto-start
+    startSlideshow();
+
+    // Skip button
+    document.getElementById('skipSlideshow').addEventListener('click', finishSlideshow);
+
+    // Click anywhere on preloader to skip (optional)
+    preloader.addEventListener('click', finishSlideshow);
+
+    // Prevent body scroll while preloader is visible
+    document.body.style.overflow = 'hidden';
+  })();
+</script>
+<!-- New Word‑Cycling Preloader -->
+<div id="wordPreloader" class="word-preloader">
+  <div class="word-preloader-content">
+    <div class="word-display" id="preloaderWord">Notes.</div>
+  </div>
+</div>
+ 
+
+  <div id="loader"><div class="spinner"></div></div>
+  <nav>
+    <a href="#hero" class="logo">
+  <img src="Screenshot 2026-03-01 110524.png" alt="Dronacharya College" style="height: 50px; width: auto;">
+</a>
+    <div class="nav-links">
+      <a href="#hero">Home</a> <a href="#about">About</a> <a href="#resources">Resources</a> <a href="#events">Events</a>
+      <a href="#holiday">Holidays</a> <a href="#guide">Guide</a> <a href="#games">Games</a> <a href="#gallery">Gallery</a> <a href="#contact">Contact</a>
+      
+    </div>
+  
+    <button id="themeToggle"><i class="fas fa-moon"></i> Dark</button>
+  </nav>
+  <!-- HERO -->
+    <section id="hero">
+      <div class="hero-content">
+        <h1>Welcome, <span class="typing" id="typingSpan"></span></h1>
+        <p class="subtitle">Dronacharya College Of Engineering – Junior Help Portal</p>
+        <a href="#resources" class="btn">Explore Resources <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </section>
+  <div class="wrapper">
+    
+
+    <!-- HERO -->
+    
+
+   
+
+    <!-- RESOURCES -->
+    <section id="resources">
+      <h2 class="section-title">Student Resources</h2>
+      <div class="card-grid">
+        <div class="card"><i class="fas fa-laptop-code"></i><h3>Coding Resources</h3><p>DSA, dev guides</p></div>
+        <div class="card"><i class="fas fa-list-ul"></i><h3>Syllabus</h3><p>Latest syllabus</p></div>
+        <div class="card"><i class="fas fa-file-alt"></i><h3>Prev Papers</h3><p>PYQs</p></div>
+        <div class="card"><i class="fas fa-map"></i><h3>Roadmaps</h3><p>Career roadmaps</p></div>
+        <div class="card"><i class="fas fa-book-open"></i><h3>Notes</h3><p>Semester-wise notes</p></div>
+      </div>
+    </section>
+
+    <!-- EVENTS (2026 list) -->
+    <!-- EVENTS (2026 list) with improved badge readability -->
+<section id="events">
+  <h2 class="section-title">Upcoming Events at DCE</h2>
+  <div class="card-grid" id="eventGrid">
+    <!-- Event 1 -->
+    <div class="event-card" data-title="Staff Fiesta 2026" data-detail="Annual get‑together – The Social Hour. January 03, 2026 (Saturday).">
+      <span class="event-badge">JAN 3, Sat</span>
+      <h3>Staff Fiesta</h3>
+      <p>Annual get‑together</p>
+    </div>
+    <!-- Event 2 -->
+    <div class="event-card" data-title="Staff Adventure Trip" data-detail="Outside campus trip. January 17, 2026 (Saturday).">
+      <span class="event-badge">JAN 17, Sat</span>
+      <h3>Staff Adventure Trip</h3>
+      <p>Outside campus</p>
+    </div>
+    <!-- Event 3 -->
+    <div class="event-card" data-title="Kite Flying Competition" data-detail="Basant Panchami celebration – Activity by NSS Unit. January 23, 2026 (1:00–3:00 PM) Friday.">
+      <span class="event-badge">JAN 23, Fri</span>
+      <h3>Kite Flying Competition</h3>
+      <p>NSS Unit</p>
+    </div>
+    <!-- Event 4 -->
+    <div class="event-card" data-title="Republic Day Celebrations" data-detail="Flag hoisting & cultural events. January 26, 2026 (Monday).">
+      <span class="event-badge">JAN 26, Mon</span>
+      <h3>Republic Day</h3>
+      <p>Celebrations</p>
+    </div>
+    <!-- Event 5 -->
+    <div class="event-card" data-title="Debate Competition" data-detail="Activity by NSS Unit. January 30, 2026 (1:00–3:00 PM) Friday.">
+      <span class="event-badge">JAN 30, Fri</span>
+      <h3>Debate Competition</h3>
+      <p>NSS Unit</p>
+    </div>
+    <!-- Event 6 -->
+    <div class="event-card" data-title="FIT India Campaign" data-detail="Theme events – Activity by NSS Unit. February 6, 2026 (1:00–3:00 PM) Friday.">
+      <span class="event-badge">FEB 6, Fri</span>
+      <h3>FIT India Campaign</h3>
+      <p>NSS Unit</p>
+    </div>
+    <!-- Event 7 -->
+    <div class="event-card" data-title="Tree Plantation Drive" data-detail="Activity by NSS Unit. February 13, 2026 (1:00–3:00 PM) Friday.">
+      <span class="event-badge">FEB 13, Fri</span>
+      <h3>Tree Plantation</h3>
+      <p>NSS Drive</p>
+    </div>
+    <!-- Event 8 -->
+    <div class="event-card" data-title="Seven Days NSS Special Camp" data-detail="February 13–19, 2026 (Friday–Thursday).">
+      <span class="event-badge">FEB 13–19</span>
+      <h3>NSS Special Camp</h3>
+      <p>7 days</p>
+    </div>
+    <!-- Event 9 -->
+    <div class="event-card" data-title="Annual Sports Day (Staff)" data-detail="Staff sports competitions. February 14, 2026 (Saturday).">
+      <span class="event-badge">FEB 14, Sat</span>
+      <h3>Sports Day (Staff)</h3>
+      <p>Staff only</p>
+    </div>
+    <!-- Event 10 -->
+    <div class="event-card" data-title="Annual Sports" data-detail="Student sports events. February 19–21, 2026 (Thursday–Saturday).">
+      <span class="event-badge">FEB 19–21</span>
+      <h3>Annual Sports</h3>
+      <p>Students</p>
+    </div>
+    <!-- Event 11 -->
+    <div class="event-card" data-title="Closing Ceremony – NSS Camp" data-detail="Seven Days NSS Camp closing. February 19, 2026 (1:00–3:00 PM) Thursday.">
+      <span class="event-badge">FEB 19, Thu</span>
+      <h3>NSS Camp Closing</h3>
+      <p>Ceremony</p>
+    </div>
+    <!-- Event 12 -->
+    <div class="event-card" data-title="Holi Celebrations" data-detail="Rangotsav – Activity by NSS Unit. February 27, 2026 (1:00–3:00 PM) Friday.">
+      <span class="event-badge">FEB 27, Fri</span>
+      <h3>Holi Celebrations</h3>
+      <p>NSS Unit</p>
+    </div>
+    <!-- Event 13 -->
+    <div class="event-card" data-title="Women's Day Celebrations" data-detail="Special events for Women's Day. March 9, 2026 (Monday).">
+      <span class="event-badge">MAR 9, Mon</span>
+      <h3>Women's Day</h3>
+      <p>Celebrations</p>
+    </div>
+    <!-- Event 14 -->
+    <div class="event-card" data-title="Wellness of Self‑Being" data-detail="Expert talk by College's Yog Club. April 3, 2026 (1:00–3:00 PM) Friday.">
+      <span class="event-badge">APR 3, Fri</span>
+      <h3>Wellness Talk</h3>
+      <p>Yog Club</p>
+    </div>
+    <!-- Event 15 -->
+    <div class="event-card" data-title="Blood Donation Camp" data-detail="Activity by NSS Unit. April 10, 2026 (Friday).">
+      <span class="event-badge">APR 10, Fri</span>
+      <h3>Blood Donation</h3>
+      <p>NSS Camp</p>
+    </div>
+    <!-- Event 16 -->
+    <div class="event-card" data-title="IPR Workshop" data-detail="Workshop on Intellectual Property Rights – World IP Day. April 24, 2026 (1:00–3:00 PM) Friday.">
+      <span class="event-badge">APR 24, Fri</span>
+      <h3>IPR Workshop</h3>
+      <p>World IP Day</p>
+    </div>
+  </div>
+</section>
+
+    <!-- HOLIDAY (2026 list) -->
+    <section id="holiday">
+      <h2 class="section-title">Holiday Calendar (Jan–Jun 2026)</h2>
+      <ul id="holidayList">
+        <li><i class="fas fa-snowman"></i> 10–14 Jan – Winter Break (Sat–Wed)</li>
+        <li><i class="fas fa-flag"></i> 26 Jan – Republic Day (Monday)</li>
+        <li><i class="fas fa-pray"></i> 1 Feb – Guru Ravidas Jayanti (Sunday)</li>
+        <li><i class="fas fa-shiva"></i> 15 Feb – Maha Shivratri (Sunday)</li>
+        <li><i class="fas fa-colors"></i> 1–8 Mar – Holi Break (as per Gurugram University)</li>
+        <li><i class="fas fa-ram"></i> 27 Mar – Ram Navami (Friday)</li>
+        <li><i class="fas fa-crown"></i> 14 Apr – Dr. B.R. Ambedkar Jayanti (Tuesday)</li>
+        <li><i class="fas fa-hindu"></i> 19 Apr – Lord Parshu Ram Jayanti (Sunday)</li>
+        <li><i class="fas fa-moon"></i> 27 May – Id-ul-Zuha (Bakrid) (Wednesday)</li>
+        <li><i class="fas fa-king"></i> 17 Jun – Maharana Pratap Jayanti (Wednesday)</li>
+        <li><i class="fas fa-feather"></i> 29 Jun – Sant Kabir Jayanti (Monday)</li>
+      </ul>
+      <div class="add-holiday">
+        <input type="text" id="holidayInput" placeholder="Add your own holiday (e.g., 5 May – Summer break)">
+        <button class="btn" id="addHolidayBtn">Add</button>
+      </div>
+    </section>
+
+    <!-- JUNIORS GUIDE -->
+    <section id="guide">
+      <h2 class="section-title">Juniors Guide</h2>
+      <div class="card-grid">
+        <div class="card"><i class="fas fa-lightbulb"></i><h3>Tips for Freshers</h3><p>Stay curious, manage time, ask seniors.</p></div>
+        <div class="card"><i class="fas fa-users"></i><h3>Clubs & Societies</h3><p>Drama, coding, robotics, music & more.</p></div>
+        <div class="card"><i class="fas fa-pencil-alt"></i><h3>Exam Prep</h3><p>PYQs, group study, sleep well.</p></div>
+      </div>
+    </section>
+
+    <!-- GAMES -->
+    <section id="games">
+      <h2 class="section-title">Games Zone</h2>
+      <div class="games-row">
+        <div class="game-card"><h3><i class="fas fa-times"></i> Tic Tac Toe</h3>
+          <div class="game-board" id="tictactoe-board">
+            <div class="cell" data-index="0"></div><div class="cell" data-index="1"></div><div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div><div class="cell" data-index="4"></div><div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div><div class="cell" data-index="7"></div><div class="cell" data-index="8"></div>
+          </div>
+          <button class="btn" id="resetTic">Reset</button> <span id="turnIndicator">X's turn</span>
+        </div>
+        <div class="game-card"><h3><i class="fas fa-th"></i> Simple Sudoku (4x4)</h3>
+          <div class="sudoku-grid" id="sudoku-grid">
+            <!-- js populates -->
+          </div>
+          <button class="btn" id="checkSudoku">Check</button> <span id="sudokuMsg"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY + lightbox -->
+    <section id="gallery">
+      <h2 class="section-title">Image Gallery</h2>
+      <div class="image-grid" id="galleryGrid">
+        <img src="https://ggnindia.dronacharya.info/images/Gallery/Infrastructure/23112022-1.jpg" class="gallery-img" alt="img1">
+        <img src="https://ggnindia.dronacharya.info/images/Gallery/Infrastructure/23112022-7.jpg" class="gallery-img" alt="img2">
+        <img src="https://ggnindia.dronacharya.info/images/Gallery/Infrastructure/23112022-9.jpg" class="gallery-img" alt="img3">
+        <img src="https://ggnindia.dronacharya.info/images/Gallery/Infrastructure/Dronacharya-college-Infrastructure.jpg" class="gallery-img" alt="img4">
+        <img src="https://ggnindia.dronacharya.info/images/Gallery/Infrastructure/25.jpg" class="gallery-img" alt="img5">
+        <img src="https://ggnindia.dronacharya.info/images/Gallery/Infrastructure/23112022-6.jpg" class="gallery-img" alt="img6">
+      </div>
+    </section>
+
+    <!-- CONTACT / CONTRIBUTION -->
+    <section id="contact">
+      <h2 class="section-title">Contact / Contribute</h2>
+      <form class="contact-form" id="contactForm">
+        <input type="text" placeholder="Your Name" id="name">
+        <input type="email" placeholder="Email" id="email">
+        <textarea placeholder="Message" rows="4" id="message"></textarea>
+        <button type="submit" class="btn">Send <i class="fas fa-paper-plane"></i></button>
+        <span id="formFeedback"></span>
+      </form>
+      <div style="text-align:center; margin-top:30px; font-size:2rem;">
+  <a href="https://www.instagram.com/kawshalll" target="_blank" rel="noopener noreferrer" style="color: inherit; margin: 0 10px; text-decoration: none;">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/kaushal-sharma-302900296/" target="_blank" rel="noopener noreferrer" style="color: inherit; margin: 0 10px; text-decoration: none;">
+    <i class="fab fa-linkedin"></i>
+  </a>
+  <!-- Optional: keep or remove Discord/GitHub -->
+
+      <section id="contact">
+      <h2 class="section-title">Contact / Contribute</h2>
+      <form class="contact-form" id="contactForm">
+        ...
+      </form>
+      <!-- social icons will be below -->
+             <!-- DEVELOPERS SECTION -->
+      <div style="margin-top: 50px;">
+        <h3 style="color: #0ff; text-align: center; margin-bottom: 30px;">Meet the Developer</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+          <!-- Kaushal Sharma -->
+          <div class="card" style="text-align: center;">
+            <img src="kaushaiil.jpeg" alt="Kaushal Sharma" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid #0ff;">
+            <h3 style="color: white;">Kaushal Sharma</h3>
+            <p style="color: #b0fff0;">Developer</p>
+            <p style="font-size: 0.95rem;">Aim: to help juniors navigate college life and provide easy access to resources.</p>
+            <a href="https://www.linkedin.com/in/kaushal-sharma-302900296/" target="_blank" style="color: #0ff; text-decoration: none; display: inline-block; margin-top: 10px;"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          </div>
+    </section>
+  
+  
+</div>
+    </section>
+
+    <footer>
+      <p class="animate-text">🚀 Dronacharya Juniors – build your future 🚀</p>
+    </footer>
+  </div>
+
+  
+
+  <!-- Modals -->
+  <div class="modal" id="lightboxModal"><span class="close" id="closeModal">&times;</span><img class="modal-content" id="modalImage"></div>
+  <div class="modal" id="eventModal"><span class="close" id="closeEvent">&times;</span><div style="background:#0a2020; padding:40px; border-radius:40px;"><h2 id="eventModalTitle"></h2><p id="eventModalDetail"></p></div></div>
+
+  <div id="scrollTop"><i class="fas fa-arrow-up"></i></div>
+
+ <!-- AI Chatbot Widget (properly placed inside body) -->
+  <div id="chatbotWidget">
+    <div id="chatbotToggle" class="chatbot-toggle">
+      <i class="fas fa-robot"></i>
+    </div>
+    <div id="chatbotWindow" class="chatbot-window hidden">
+      <div class="chatbot-header">
+        <h3>AI College Assistant</h3>
+        <button id="chatbotClose" class="chatbot-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div id="chatbotMessages" class="chatbot-messages">
+        <div class="message bot">👋 Hi! Ask me anything about Dronacharya College – notes, syllabus, events, or college life!</div>
+      </div>
+      <div class="chatbot-input-area">
+        <input type="text" id="chatbotInput" placeholder="Type your question...">
+        <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
