@@ -246,7 +246,7 @@ heroSection.style.backgroundColor = '#0b0f15';
     if (indicator) indicator.remove();
   }
   async function askAI(question) {
-    const API_KEY = 'AIzaSyBZLxy5hAmKJZ2bKSE22j4jzkkD0WqF5uw';
+    const API_KEY = 'YOUR_API_KEY';
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
     const systemPrompt = `You are a helpful assistant for Dronacharya College of Engineering. 
 Answer questions about:
